@@ -95,3 +95,253 @@ a:hover {
   font-size: 0.8125rem;
   color: var(--text-muted);
 }
+
+.topbar__right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.topbar__user {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.topbar__logout {
+  font: inherit;
+  font-size: 0.8125rem;
+  padding: 0.35rem 0.65rem;
+  cursor: pointer;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.topbar__logout:hover {
+  background: var(--bg-subtle);
+}
+
+.left-sidebar {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  transition: width 0.18s ease;
+}
+
+.left-sidebar--collapsed {
+  width: 44px;
+  min-width: 44px;
+}
+
+.left-sidebar__toolbar {
+  flex-shrink: 0;
+  padding: 0.35rem 0.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.left-sidebar__body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 0.5rem 0 0.75rem;
+}
+
+.sidebar-toggle {
+  width: 100%;
+  font: inherit;
+  font-size: 0.75rem;
+  padding: 0.4rem;
+  cursor: pointer;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.sidebar-toggle:hover {
+  color: var(--text);
+  border-color: var(--border);
+  background: var(--bg);
+}
+
+.file-tree__title {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  padding: 0 0.75rem 0.5rem;
+}
+
+.file-tree__dir,
+.file-tree__file {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  padding-right: 0.5rem;
+}
+
+.file-tree__dir {
+  cursor: pointer;
+  color: var(--text-muted);
+}
+
+.file-tree__dir:hover {
+  color: var(--text);
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.file-tree__file {
+  color: var(--text-muted);
+  cursor: default;
+}
+
+.file-tree__chevron {
+  display: inline-block;
+  width: 1rem;
+  font-size: 0.65rem;
+  vertical-align: middle;
+  color: var(--text-faint);
+}
+
+.file-tree__label {
+  vertical-align: middle;
+}
+
+.file-tree__children {
+  border-left: 1px solid var(--border);
+  margin-left: 0.65rem;
+}
+
+.login-page {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-subtle);
+}
+
+.login-page__header {
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.login-page__main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 320px;
+  padding: 1.75rem 1.5rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.login-card__title {
+  margin: 0 0 0.35rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.login-card__hint {
+  margin: 0 0 1.25rem;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.login-card__error {
+  margin: -0.5rem 0 0.75rem;
+  font-size: 0.8125rem;
+  color: #991b1b;
+}
+
+.login-card__label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+}
+
+.login-card__select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.875rem;
+  padding: 0.5rem 0.65rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.login-card__button {
+  width: 100%;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.55rem 1rem;
+  cursor: pointer;
+  color: var(--bg);
+  background: var(--text);
+  border: none;
+  border-radius: 6px;
+}
+
+.login-card__button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.login-card__button:not(:disabled):hover {
+  opacity: 0.92;
+}
+
+.markdown-body {
+  max-width: 42rem;
+}
+
+.markdown-body h1 {
+  margin: 0 0 0.75rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.5rem;
+}
+
+.markdown-body h2 {
+  margin: 1.5rem 0 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.markdown-body h3 {
+  margin: 1.25rem 0 0.4rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.markdown-body p {
+  margin: 0 0 0.75rem;
+  color: var(--text-muted);
+}

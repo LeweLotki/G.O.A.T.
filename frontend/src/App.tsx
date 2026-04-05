@@ -1,12 +1,32 @@
-import { useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
+import { BrowserRouter, Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { LeftSideBar } from "./components/common/left_side_bar";
-import { UserContext, type UserName } from "./context/user";
+import { ProtectedRoute } from "./components/common/ProtectedRoute";
+import { useSession } from "./context/user";
+import { LoginPage } from "./pages/LoginPage";
+import { MainViewPage } from "./pages/MainViewPage";
 
 function AppShell({ children }: { children: ReactNode }) {
+  const { user, logout } = useSession();
+  const navigate = useNavigate();
+
   return (
     <>
       <header className="topbar">
         <span className="brand">goat</span>
+        <div className="topbar__right">
+          <span className="topbar__user">{user}</span>
+          <button
+            type="button"
+            className="topbar__logout"
+            onClick={() => {
+              logout();
+              navigate("/login", { replace: true });
+            }}
+          >
+            Sign out
+          </button>
+        </div>
       </header>
       <div className="layout">
         <LeftSideBar />
@@ -16,34 +36,24 @@ function AppShell({ children }: { children: ReactNode }) {
   );
 }
 
-export default function App() {
-  const [user, setUser] = useState<UserName | null>(null);
-
+function MainLayout() {
   return (
-    <UserContext.Provider value={user}>
+    <ProtectedRoute>
       <AppShell>
-        <p className="lead">Session</p>
-        <p className="caption">
-          {user ? `Signed in as ${user}.` : "No user selected (wire login UI next)."}
-        </p>
-        <div style={{ marginTop: "1rem" }}>
-          <label htmlFor="user-pick" className="caption">
-            Dev: pick user
-          </label>
-          <select
-            id="user-pick"
-            value={user ?? ""}
-            onChange={(e) => setUser((e.target.value || null) as UserName | null)}
-            style={{ display: "block", marginTop: "0.35rem", maxWidth: "12rem" }}
-          >
-            <option value="">—</option>
-            <option value="Marcin">Marcin</option>
-            <option value="Emilia">Emilia</option>
-            <option value="Ala">Ala</option>
-            <option value="Artur">Artur</option>
-          </select>
-        </div>
+        <MainViewPage />
       </AppShell>
-    </UserContext.Provider>
+    </ProtectedRoute>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/" element={<MainLayout />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
   );
 }

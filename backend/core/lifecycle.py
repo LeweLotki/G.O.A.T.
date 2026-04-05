@@ -3,11 +3,13 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
+from api.users.crud import seed_users_if_empty
 from core.database import connect_db, disconnect_db
 
 
 @asynccontextmanager
 async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
     await connect_db()
+    await seed_users_if_empty()
     yield
     await disconnect_db()

@@ -1,37 +1,58 @@
 """MongoDB connection and Beanie document registration."""
 
+from collections.abc import Sequence
+
 from beanie import Document, init_beanie
-from motor.motor_asyncio import AsyncIOMotorClient
+from pymongo import AsyncMongoClient
+from pymongo.asynchronous.database import AsyncDatabase
 
 from core.settings import settings
 
-_client: AsyncIOMotorClient | None = None
+_client: AsyncMongoClient | None = None
+_database: AsyncDatabase | None = None
 
 
-class PlaceholderDoc(Document):
-    """Registers an initial collection; replace or extend with real domain models."""
+from api.users.models import User
 
-    label: str = ""
-
-    class Settings:
-        name = "placeholder"
-
-
-# Register all Beanie document classes here before init_beanie runs.
-DOCUMENT_MODELS: list[type[Document]] = [PlaceholderDoc]
+DOCUMENT_MODELS: Sequence[type[Document]] = (User,)
 
 
 async def connect_db() -> None:
-    global _client
-    _client = AsyncIOMotorClient(settings.mongo_uri)
+    """Create MongoDB client and initialize Beanie."""
+    global _client, _database
+
+    if _client is not None:
+        return
+
+    if not DOCUMENT_MODELS:
+        raise RuntimeError(
+            "DOCUMENT_MODELS is empty. Import and register your Beanie documents "
+            "before calling connect_db()."
+        )
+
+    _client = AsyncMongoClient(settings.mongo_uri)
+    await _client.admin.command("ping")
+
+    _database = _client[settings.mongo_db_name]
+
     await init_beanie(
-        database=_client[settings.mongo_db_name],
-        document_models=DOCUMENT_MODELS,
+        database=_database,
+        document_models=list(DOCUMENT_MODELS),
     )
 
 
 async def disconnect_db() -> None:
-    global _client
+    """Close MongoDB client."""
+    global _client, _database
+
     if _client is not None:
-        _client.close()
+        await _client.close()
         _client = None
+        _database = None
+
+
+def get_database() -> AsyncDatabase:
+    """Return initialized MongoDB database instance."""
+    if _database is None:
+        raise RuntimeError("Database is not connected. Call connect_db() first.")
+    return _database
