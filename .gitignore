@@ -1,0 +1,11 @@
+# back
+__pycache__
+*.pyc
+.pytest_cache
+.env
+.venv
+
+# front
+node_modules
+dist
+.git
