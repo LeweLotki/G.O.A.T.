@@ -2,6 +2,7 @@ import { type ReactNode } from "react";
 import { BrowserRouter, Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { LeftSideBar } from "./components/common/left_side_bar";
 import { ProtectedRoute } from "./components/common/ProtectedRoute";
+import { FileBrowseProvider } from "./context/file_browse";
 import { useSession } from "./context/user";
 import { LoginPage } from "./pages/LoginPage";
 import { MainViewPage } from "./pages/MainViewPage";
@@ -39,9 +40,11 @@ function AppShell({ children }: { children: ReactNode }) {
 function MainLayout() {
   return (
     <ProtectedRoute>
-      <AppShell>
-        <MainViewPage />
-      </AppShell>
+      <FileBrowseProvider>
+        <AppShell>
+          <MainViewPage />
+        </AppShell>
+      </FileBrowseProvider>
     </ProtectedRoute>
   );
 }

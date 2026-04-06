@@ -174,8 +174,7 @@ a:hover {
   padding: 0 0.75rem 0.5rem;
 }
 
-.file-tree__dir,
-.file-tree__file {
+.file-tree__dir {
   display: block;
   width: 100%;
   text-align: left;
@@ -184,15 +183,11 @@ a:hover {
   line-height: 1.35;
   border: none;
   background: transparent;
-  color: var(--text);
+  color: var(--text-muted);
+  cursor: pointer;
   padding-top: 0.2rem;
   padding-bottom: 0.2rem;
   padding-right: 0.5rem;
-}
-
-.file-tree__dir {
-  cursor: pointer;
-  color: var(--text-muted);
 }
 
 .file-tree__dir:hover {
@@ -201,8 +196,51 @@ a:hover {
 }
 
 .file-tree__file {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
   color: var(--text-muted);
-  cursor: default;
+  cursor: pointer;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  padding-right: 0.5rem;
+}
+
+.file-tree__file:hover {
+  color: var(--text);
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.file-tree__file--selected {
+  color: var(--text);
+  background: rgba(0, 0, 0, 0.07);
+  font-weight: 500;
+}
+
+.file-tree__meta,
+.file-tree__error,
+.file-tree__warn {
+  margin: 0 0.75rem 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+
+.file-tree__meta {
+  color: var(--text-muted);
+}
+
+.file-tree__error {
+  color: #991b1b;
+}
+
+.file-tree__warn {
+  color: #a16207;
 }
 
 .file-tree__chevron {
@@ -344,4 +382,44 @@ a:hover {
 .markdown-body p {
   margin: 0 0 0.75rem;
   color: var(--text-muted);
+}
+
+.main-view__empty {
+  max-width: 28rem;
+}
+
+.main-view__empty-title {
+  margin: 0 0 0.35rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.main-view__empty-hint {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.main-view__state {
+  max-width: 36rem;
+}
+
+.main-view__state--error .lead {
+  margin-bottom: 0.35rem;
+}
+
+.main-view__error-detail {
+  margin: 1rem 0 0;
+  font-size: 0.8125rem;
+  color: #991b1b;
+  white-space: pre-wrap;
+}
+
+.inline-code {
+  font-family: ui-monospace, monospace;
+  font-size: 0.9em;
+  padding: 0.1em 0.35em;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: 4px;
 }
